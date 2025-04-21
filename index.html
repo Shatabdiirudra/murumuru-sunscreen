@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Muru Muru Butter Sunscreen</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fffaf0;
+      color: #333;
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #d35400;
+      text-align: center;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .label {
+      font-weight: bold;
+    }
+    .price-box {
+      background-color: #fce5cd;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .footer {
+      margin-top: 40px;
+      font-style: italic;
+      color: #555;
+      text-align: center;
+    }
+
+    /* Chatbot icon button */
+    .chat-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #d35400;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
+
+    /* Chatbox container */
+    .chatbot-container {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 300px;
+      max-height: 400px;
+      background-color: white;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+    }
+
+    .chat-header {
+      background-color: #d35400;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      outline: none;
+    }
+
+    .chat-input button {
+      background-color: #d35400;
+      color: white;
+      border: none;
+      padding: 0 15px;
+      cursor: pointer;
+    }
+
+    .user-msg {
+      text-align: right;
+      margin: 5px 0;
+    }
+
+    .bot-msg {
+      text-align: left;
+      margin: 5px 0;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Muru Muru Butter Sunscreen</h1>
+
+  <div class="section">
+    <span class="label">Category:</span> Beauty & Skincare
+  </div>
+
+  <div class="section">
+    <span class="label">Size / Weight:</span> 120 gms
+  </div>
+
+  <div class="section price-box">
+    <p><span class="label">Base Price:</span> ₹500</p>
+    <p><span class="label">GST (18%):</span> ₹90</p>
+    <p><span class="label">Total MRP:</span> ₹590</p>
+    <p><em>BasePrice = MRP ÷ (1 + GST rate) = ₹590 ÷ 1.18 = ₹500</em></p>
+  </div>
+
+  <div class="section">
+    <span class="label">GST on cosmetic products:</span> 18%
+  </div>
+
+  <div class="section">
+    <span class="label">Expiry Date:</span> 28th January 2027
+  </div>
+
+  <div class="section">
+    <span class="label">Manufacturer:</span> Shatabdi. co & co
+  </div>
+
+  <div class="footer">
+    Made with care and quality.
+  </div>
+
+  <!-- Chatbot Icon Button -->
+  <button class="chat-icon" onclick="toggleChat()">💬</button>
+
+  <!-- Chatbot Container -->
+  <div class="chatbot-container" id="chatbotBox">
+    <div class="chat-header">SkinCare Bot</div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="bot-msg">Hi there! Ask me anything about skincare 💆‍♀️</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Type your question..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    function toggleChat() {
+      const chatbot = document.getElementById("chatbotBox");
+      chatbot.style.display = chatbot.style.display === "flex" ? "none" : "flex";
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const msg = input.value.trim();
+      if (msg === "") return;
+
+      const messages = document.getElementById("chatMessages");
+
+      // Display user's message
+      const userMsg = document.createElement("div");
+      userMsg.className = "user-msg";
+      userMsg.textContent = msg;
+      messages.appendChild(userMsg);
+
+      // Simulated AI reply
+      const botReply = getBotResponse(msg);
+      const botMsg = document.createElement("div");
+      botMsg.className = "bot-msg";
+      botMsg.textContent = botReply;
+      messages.appendChild(botMsg);
+
+      messages.scrollTop = messages.scrollHeight;
+      input.value = "";
+    }
+
+    function getBotResponse(msg) {
+      msg = msg.toLowerCase();
+      if (msg.includes("oily skin")) {
+        return "For oily skin, use lightweight, non-comedogenic sunscreens with matte finish.";
+      } else if (msg.includes("dry skin")) {
+        return "Look for sunscreens with hydrating ingredients like hyaluronic acid or glycerin.";
+      } else if (msg.includes("spf")) {
+        return "SPF stands for Sun Protection Factor. SPF 30–50 is generally recommended.";
+      } else if (msg.includes("muru muru")) {
+        return "Muru Muru Butter is rich in fatty acids and helps nourish and moisturize skin.";
+      } else if (msg.includes("sensitive skin")) {
+        return "Try mineral-based sunscreens with zinc oxide or titanium dioxide.";
+      } else {
+        return "Great question! For personalized skincare advice, we recommend consulting a dermatologist.";
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+   
